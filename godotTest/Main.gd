@@ -26,7 +26,7 @@ func _on_start_timer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
 
-func _on_mob_timer_timeout():
+func _on_mob_timer_timeout():	
 	var mob = mob_scene.instantiate()
 	
 	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
@@ -40,6 +40,6 @@ func _on_mob_timer_timeout():
 	mob.direction = direction
 
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	mob.linear_velocity
+	mob.linear_velocity = velocity.rotated(direction)
 	
 	add_child(mob)
