@@ -2,11 +2,16 @@ extends Area2D
 
 @export var speed = 400 # Speed of the player (pixels/sec).
 var screen_size # Size of game windows
+signal hit
+
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	hide()
-	#this is where you left off for tonite
+	
 
 func _process(_delta):
 	var velocity = Vector2.ZERO
@@ -35,3 +40,9 @@ func _process(_delta):
 			
 	position += velocity * _delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+
+func _on_body_entered(body):
+	hide()
+	hit.emit()
+	# Must be deferred as we can't change physics properties on a physics callback.
+	$CollisionShape2D.set_deferred("disabled",true)
