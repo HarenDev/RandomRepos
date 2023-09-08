@@ -41,7 +41,7 @@ func _process(_delta):
 	position += velocity * _delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	hide()
 	hit.emit()
 	# Must be deferred as we can't change physics properties on a physics callback.
