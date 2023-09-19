@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://UI.gd" id="1_urv66"]
 [ext_resource type="FontFile" uid="uid://xcisfim8k1l2" path="res://dodge_the_creeps_2d_assets/fonts/Xolonium-Regular.ttf" id="2_ogs6r"]
 
-[sub_resource type="InputEventAction" id="InputEventAction_d8e8a"]
+[sub_resource type="InputEventAction" id="InputEventAction_r3pdj"]
 action = &"start_game"
 
 [sub_resource type="Shortcut" id="Shortcut_fbd6f"]
-events = [SubResource("InputEventAction_d8e8a")]
+events = [SubResource("InputEventAction_r3pdj")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_urv66")
