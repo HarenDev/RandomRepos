@@ -37,3 +37,5 @@ fov = 90.0
 size = 19.0
 
 [node name="Mobs" parent="." instance=ExtResource("2_agvu4")]
+min_speed = null
+max_speed = null
