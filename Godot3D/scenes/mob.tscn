@@ -8,8 +8,6 @@ size = Vector3(2.07591, 1.7981, 2.12344)
 
 [node name="Mobs" type="CharacterBody3D"]
 script = ExtResource("1_37w1t")
-min_speed = null
-max_speed = null
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_eqlvo")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1048v38axvhe"]
+[gd_scene load_steps=13 format=3 uid="uid://c1048v38axvhe"]
 
 [ext_resource type="PackedScene" uid="uid://dxhvgsi604253" path="res://scenes/player.tscn" id="1_8jqle"]
 [ext_resource type="PackedScene" uid="uid://cpqlcqoyir8ml" path="res://scenes/mob.tscn" id="2_agvu4"]
@@ -8,6 +8,30 @@ size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7460x"]
 size = Vector3(60, 2, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a5d7"]
+albedo_color = Color(0.0823529, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_85blr"]
+material = SubResource("StandardMaterial3D_3a5d7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isntq"]
+albedo_color = Color(0.129412, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jy8ro"]
+material = SubResource("StandardMaterial3D_isntq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wutye"]
+albedo_color = Color(0.207843, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ibvhh"]
+material = SubResource("StandardMaterial3D_wutye")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2d2g"]
+albedo_color = Color(0.152941, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cky8n"]
+material = SubResource("StandardMaterial3D_e2d2g")
 
 [node name="Main" type="Node"]
 
@@ -24,8 +48,29 @@ mesh = SubResource("BoxMesh_7460x")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.96284, 0)
 shadow_enabled = true
 
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.49109, 2.14584, 7.13012)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94112, -1, 2.06237)
+mesh = SubResource("CylinderMesh_85blr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96001, -1, -16.4274)
+mesh = SubResource("CylinderMesh_jy8ro")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8599, -1, -16.3042)
+mesh = SubResource("CylinderMesh_ibvhh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8191, -1, 2.04419)
+mesh = SubResource("CylinderMesh_cky8n")
+
 [node name="Player" parent="." instance=ExtResource("1_8jqle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Mobs" parent="." instance=ExtResource("2_agvu4")]
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1000, 0)
@@ -35,7 +80,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
 projection = 1
 fov = 90.0
 size = 19.0
-
-[node name="Mobs" parent="." instance=ExtResource("2_agvu4")]
-min_speed = null
-max_speed = null
