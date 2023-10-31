@@ -49,10 +49,12 @@ mob_scene = ExtResource("2_agvu4")
 curve = SubResource("Curve3D_ej2ey")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.999998, 0, 0.00180498, 0, 1, 0, -0.00180498, 0, -0.999998, -12.4296, 0, -9.28362)
+transform = Transform3D(-0.999998, 0, 0.00180689, 0, 1, 0, -0.00180689, 0, -0.999998, -12.4296, 0, -9.28362)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_s3x6t")
@@ -85,8 +87,11 @@ mesh = SubResource("CylinderMesh_cky8n")
 
 [node name="Player" parent="." instance=ExtResource("1_8jqle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+collision_mask = 6
 
-[node name="Mobs" parent="." instance=ExtResource("2_agvu4")]
+[node name="Mobs" parent="." groups=["mob"] instance=ExtResource("2_agvu4")]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1000, 0)
@@ -96,3 +101,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
 projection = 1
 fov = 90.0
 size = 19.0
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
