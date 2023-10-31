@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c1048v38axvhe"]
+[gd_scene load_steps=10 format=3 uid="uid://c1048v38axvhe"]
 
 [ext_resource type="PackedScene" uid="uid://dxhvgsi604253" path="res://scenes/player.tscn" id="1_8jqle"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_vou8b"]
 [ext_resource type="PackedScene" uid="uid://cpqlcqoyir8ml" path="res://scenes/mob.tscn" id="2_agvu4"]
+[ext_resource type="FontFile" uid="uid://cp3ncuegn83jv" path="res://fonts/Montserrat-Medium.ttf" id="4_j41rx"]
+[ext_resource type="Script" path="res://scenes/ScoreLabel.gd" id="5_rgr8p"]
 
 [sub_resource type="Curve3D" id="Curve3D_ej2ey"]
 _data = {
@@ -17,29 +19,9 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_7460x"]
 size = Vector3(60, 2, 60)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a5d7"]
-albedo_color = Color(0.0823529, 1, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_85blr"]
-material = SubResource("StandardMaterial3D_3a5d7")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isntq"]
-albedo_color = Color(0.129412, 1, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_jy8ro"]
-material = SubResource("StandardMaterial3D_isntq")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wutye"]
-albedo_color = Color(0.207843, 1, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ibvhh"]
-material = SubResource("StandardMaterial3D_wutye")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2d2g"]
-albedo_color = Color(0.152941, 1, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_cky8n"]
-material = SubResource("StandardMaterial3D_e2d2g")
+[sub_resource type="Theme" id="Theme_dvaau"]
+default_font = ExtResource("4_j41rx")
+default_font_size = 22
 
 [node name="Main" type="Node"]
 script = ExtResource("1_vou8b")
@@ -66,25 +48,6 @@ mesh = SubResource("BoxMesh_7460x")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.96284, 0)
 shadow_enabled = true
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.49109, 2.14584, 7.13012)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.94112, -1, 2.06237)
-mesh = SubResource("CylinderMesh_85blr")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96001, -1, -16.4274)
-mesh = SubResource("CylinderMesh_jy8ro")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8599, -1, -16.3042)
-mesh = SubResource("CylinderMesh_ibvhh")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8191, -1, 2.04419)
-mesh = SubResource("CylinderMesh_cky8n")
-
 [node name="Player" parent="." instance=ExtResource("1_8jqle")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 6
@@ -94,10 +57,9 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CameraPivot" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1000, 0)
+transform = Transform3D(1, 0, 0, 0, 0.27228, 0.962218, 0, -0.962218, 0.27228, 0, 12.3166, 2.34866)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
 projection = 1
 fov = 90.0
 size = 19.0
@@ -105,5 +67,43 @@ size = 19.0
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_dvaau")
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 53.0
+offset_right = 141.0
+offset_bottom = 31.0
+text = "Score :0"
+script = ExtResource("5_rgr8p")
+
+[node name="Retry" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="UI/Retry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

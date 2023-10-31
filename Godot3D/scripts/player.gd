@@ -13,6 +13,12 @@ extends CharacterBody3D
 # 3D Vector combining speed with a direction
 var target_velocity = Vector3.ZERO
 
+# Vertical impulse applied to the character upon bouncing over a mob in
+# meters per second.
+@export var bounce_impulse = 16
+
+signal hit
+
 func _physics_process(delta):
 	
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
@@ -48,3 +54,28 @@ func _physics_process(delta):
 		
 	velocity = target_velocity
 	move_and_slide()
+	
+	for index in range(get_slide_collision_count()):
+		
+		var collision = get_slide_collision(index)
+		
+		if collision.get_collider() == null:
+			continue
+		
+		if collision.get_collider().is_in_group("mob"):
+			var mob = collision.get_collider()
+			
+			if Vector3.UP.dot(collision.get_normal()) > 0.1:
+				mob.squash()
+				target_velocity.y = bounce_impulse
+				
+func die():
+	hit.emit()
+	queue_free()
+	
+func _on_mod_detector_body_entered(body):
+	die()
+
+func _on_player_hit():
+	$MobTimer.stop()
+	
