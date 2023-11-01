@@ -1,8 +1,7 @@
 res://scenes/main.tscn
-res://scripts/player.gd
 res://scenes/mob.tscn
-res://scripts/mob.gd
 res://scenes/player.tscn
-res://scenes/main.gd
-res://scenes/ScoreLabel.gd
 res://scenes/audio_stream_player.tscn
+res://scenes/main.gd
+res://scripts/mob.gd
+res://scripts/player.gd
