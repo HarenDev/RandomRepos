@@ -1,2 +1,0 @@
-﻿65146
-C:/Users/rafae/Documents/Godot_v4.1.1-stable_win64.exe/Godot_v4.1.1-stable_mono_win64.exe
